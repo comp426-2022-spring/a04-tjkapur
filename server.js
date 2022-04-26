@@ -43,10 +43,7 @@ if(args.help || args.h) {
   process.exit(0)
 }
 
-if(args.log == 'false') {
-  console.log("dont create log")
-} else {
-
+if(args.log == true) {
     const accesslog = fs.createWriteStream('access.log', { flags: 'a'})
     app.use(morgan('combined', {stream: accesslog}))
 }
