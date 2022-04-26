@@ -1,8 +1,10 @@
+"use strict";
+
 const database = require('better-sqlite3');
 
-const db = new database('log.db');
+const logdb = new database('log.db');
 
-const stmt = db.prepare(`
+const stmt = logdb.prepare(`
 SELECT name FROM sqlite_master WHERE type='table' and name='userinfo';`
 );
 
@@ -14,7 +16,7 @@ if (row == undefined) {
 
     const sqlInit = `CREATE TABLE accesslog ( id INTEGER NOT NULL PRIMARY KEY, remoteaddr TEXT, remoteuser TEXT, time INTEGER, method TEXT, url TEXT, protocol TEXT, httpversion TEXT, status INTEGER, referer TEXT, useragent TEXT);`;
 
-    db.exec(sqlInit);
+    logdb.exec(sqlInit);
 
 } else {
 
@@ -24,4 +26,4 @@ if (row == undefined) {
 
 // Export all of the above as a module so that we can use it elsewhere.
 
-module.exports = db;
+module.exports = logdb;
