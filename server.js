@@ -16,6 +16,8 @@ const cors = require('cors')
 // Default: 5000
 const args = require('minimist')(process.argv.slice(2))
 
+args["help", "port", "debug", "log"]
+
 const port = args.port || process.env.PORT || 5000
 
 // start app server
